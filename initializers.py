@@ -20,7 +20,7 @@ test scrip for createFolderForSchool
 
 createFolderForSchool('strw239')
 """
-
+createFolderForSchool('were239')
 
 #Fuction to create encodings file
 def createEncodingsFile(path):
@@ -60,5 +60,4 @@ test script for addFolderForClassroom
 
 addFolderForClassroom('strw239',7,'C',4)
 """
-
-
+addFolderForClassroom('were239',7,'C',19)
