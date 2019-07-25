@@ -21,7 +21,6 @@ def generateEncodingsFromImages(directoryPath):
     # loop over the image paths
     for (i, imagePath) in enumerate(imagePaths):
         # extract the person name from the image path
-        #print("[INFO] processing image {}/{}".format(i + 1,len(imagePaths)))
         name = imagePath.split(os.path.sep)[-2]
 
         # load the input image and convert it from RGB (OpenCV ordering)
@@ -44,7 +43,6 @@ def generateEncodingsFromImages(directoryPath):
             knownNames.append(name)
 
     # dump the facial encodings + names to disk
-    #print("[INFO] serializing encodings...")
     data = {"encodings": knownEncodings, "names": knownNames}
     f = open('../encodings'+'/'+str(directoryPath.split('/',2)[2])+'/'+'encodings.pickle', "wb")
     f.write(pickle.dumps(data))
@@ -52,8 +50,8 @@ def generateEncodingsFromImages(directoryPath):
 
 
 """
-test script for generateEncodingsFromImage
+test script for generateEncodingsFromImages
 
-generateEncodingsFromImage('../data/strw239/7-C')
+generateEncodingsFromImages('../data/strw239/7-C')
 """
 generateEncodingsFromImages('../data/strw239/7-C')

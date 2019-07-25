@@ -8,7 +8,6 @@ import cv2
 def identifyStudentsInImage(id_generated_for_school,standard,section,inputImage):
 
     # load the known faces and embeddings
-    print("[INFO] loading encodings...")
     data = pickle.loads(open('../encodings/' + str(id_generated_for_school) + '/' + str(standard) + '-' + str(section)+'/encodings.pickle','rb').read())
 
     # load the input image and convert it from BGR to RGB
@@ -28,8 +27,7 @@ def identifyStudentsInImage(id_generated_for_school,standard,section,inputImage)
     for encoding in encodings:
         # attempt to match each face in the input image to our known
         # encodings
-        matches = face_recognition.compare_faces(data["encodings"],
-                                                 encoding)
+        matches = face_recognition.compare_faces(data["encodings"],encoding)
         name = "Unknown"
 
         # check to see if we have found a match
@@ -46,6 +44,7 @@ def identifyStudentsInImage(id_generated_for_school,standard,section,inputImage)
                 name = data["names"][i]
                 counts[name] = counts.get(name, 0) + 1
 
+
             # determine the recognized face with the largest number of
             # votes (note: in the event of an unlikely tie Python will
             # select first entry in the dictionary)
@@ -61,4 +60,4 @@ test script for identifyStudentsInImage
 
 print(identifyStudentsInImage('strw239',7,'C','/home/akshaya/Desktop/Projects/dataset/bhushan/01561036691.jpg'))
 """
-print(identifyStudentsInImage('strw239',7,'C','/home/akshaya/Desktop/Projects/dataset/bhushan/01561036691.jpg'))
+print(identifyStudentsInImage('strw239',7,'C','/home/akshaya/Pictures/IMG-20190501-WA0001.jpg'))
