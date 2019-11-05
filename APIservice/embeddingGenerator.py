@@ -4,6 +4,7 @@ import urllib.request
 import cv2
 import numpy as np
 import asyncio
+import time
 
 class EmbeddingGenerator:
 
@@ -18,7 +19,7 @@ class EmbeddingGenerator:
         faces = self.model.get(image)
         for idx, face in enumerate(faces):
             print("Face [%d]:" % idx)
-            print("\tage:%d" % (face.age))
+            """print("\tage:%d" % (face.age))
             gender = 'Male'
             if face.gender == 0:
                 gender = 'Female'
@@ -28,8 +29,12 @@ class EmbeddingGenerator:
             print("\tbbox:%s" % (face.bbox.astype(np.int).flatten()))
             print("\tlandmark:%s" % (face.landmark.astype(np.int).flatten()))
             print("")
+            """
         self.isBusy=False
+        return True
 
     def generatorIsBusy(self):
         return self.isBusy
 
+    def setGeneratorBusy(self):
+        self.isBusy = True
