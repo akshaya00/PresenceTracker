@@ -1,1 +1,3 @@
-This is based on insightface (arcFace) project
+1. Install mxnet according to system configuration
+2. Install insighface
+
