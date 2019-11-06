@@ -14,9 +14,21 @@ class EmbeddingGenerator:
         self.model.prepare(ctx_id=self.ctx_id, nms=0.4)
         self.isBusy = False
 
+    def addFaceData(self, image, lock):
+        lock.acquire()
+        print("Is busy to add : " + str(self.isBusy))
+        x = []
+        if self.isBusy:
+            x = [False, None]
+        else:
+            self.isBusy = True
+            x = [True, self.getFaceData(image)]
+        lock.release()
+        return x
+
     async def getFaceData(self, image):
-        self.isBusy = True
         faces = self.model.get(image)
+
         for idx, face in enumerate(faces):
             print("Face [%d]:" % idx)
             """print("\tage:%d" % (face.age))
@@ -30,11 +42,9 @@ class EmbeddingGenerator:
             print("\tlandmark:%s" % (face.landmark.astype(np.int).flatten()))
             print("")
             """
-        self.isBusy=False
+        # print ("Result from getFaceData, isBusy " + str(self.isBusy))
+        self.isBusy = False
         return True
 
     def generatorIsBusy(self):
         return self.isBusy
-
-    def setGeneratorBusy(self):
-        self.isBusy = True
