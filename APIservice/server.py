@@ -14,7 +14,7 @@ def createGenerator(i,inputQueue, outputQueue):
 
 
 def startPredictionProcesses(inputQueue, outputQueue):
-    for generatorCount in range(settings.Number_of_responding_threads):
+    for generatorCount in range(settings.Number_of_prediction_threads):
         process = multiprocessing.Process(target=createGenerator, args=(generatorCount,inputQueue,outputQueue))
         process.start()
 
@@ -27,8 +27,9 @@ def Replier(outputQueue):
 
 
 def startReplyServer(outputQueue):
-    process = multiprocessing.Process(target=Replier, args=(outputQueue,))
-    process.start()
+    for replier in range(settings.Number_of_responding_threads):
+        process = multiprocessing.Process(target=Replier, args=(outputQueue,))
+        process.start()
 
 
 

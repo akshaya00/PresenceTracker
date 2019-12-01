@@ -29,9 +29,8 @@ class EmbeddingGenerator:
                 while ret:
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
-                    cv2.imshow('frame',frame)
-                    faces = self.model.get(frame)
 
+                    faces = self.model.get(frame)
                     for idx, face in enumerate(faces):
                         #print("bbox = "+str(type(face.bbox))+" landmark ="+str(type(face.landmark))+" det_score = "+str(type(face.det_score))+" embedding ="+str(type(face.embedding))+" gender ="+ str(type(face.gender))+" age = "+str(type(face.age))+" normed_embedding="+str(type(face.normed_embedding))+" embedding_norm =" +str(type(face.embedding_norm)))
                         data = {}
@@ -48,6 +47,8 @@ class EmbeddingGenerator:
                         data['normed_embedding'] = face.normed_embedding.tolist()
                         data['embedding_norm']=str(face.embedding_norm)
                         self.outputQueue.put(json.dumps(data))
+                        cv2.rectangle(frame, (int(face.bbox[0]), int(face.bbox[1])), (int(face.bbox[2]), int(face.bbox[3])), (0, 0, 255), 5)
+                    cv2.imshow('Processing on Thread '+str(self.threadNum), frame)
                     ret, frame = video.read()
                 video.release()
                 cv2.destroyAllWindows()
