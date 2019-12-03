@@ -1,2 +1,2 @@
-# ats
-attendance tracking system
+# Presence tracker system
+
