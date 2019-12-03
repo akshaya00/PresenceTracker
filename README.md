@@ -1,6 +1,6 @@
 # Presence tracker system
 
-####Basic Design of the system
+#### Basic Design of the system
  
 ![Figure 1](PresenceTracker.jpg)
 
@@ -9,11 +9,11 @@ There are three major components of the system
 2. API service
 3. The database
 
-####The Edge device
+#### The Edge device
 The edge device captures and uploads video to cloud. Then it sends a request to the API service to process the 
 video.
 
-####The API service
+#### The API service
 The API service has and exposed flask endpoint. This request is stored in a queue.
 
 The API service hosts multiple instances of deep learning application to perform faster encoding of the 
@@ -21,7 +21,7 @@ detected faces in the videos. Each encoded face is then pushed to a response que
 
 Each response from the queue is then send to the database server for recognition and storage.
 
-####The Database server
+#### The Database server
 This consists of two components
 1. Recognition cluster 
 2. Database
